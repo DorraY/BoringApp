@@ -1,6 +1,7 @@
 
 import 'package:boring_app/activities/bloc/activity_bloc.dart';
 import 'package:boring_app/activities/models/activity.dart';
+import 'package:boring_app/activities/view/activity_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:math' as math;
@@ -94,20 +95,15 @@ class ActivityItem extends StatelessWidget {
                       )),
                   Align(
                       alignment: Alignment.topRight,
-                      child:Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Transform.rotate(
-                            angle: math.pi/10,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Image.asset('assets/label.png',height: 100,width: 100,fit: BoxFit.fill,),
-                                Text(activity.type.name),
-                              ],
-                            ),
-                          ),
-                        ],
+                      child:Transform.rotate(
+                        angle: math.pi/10,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Image.asset('assets/label.png',height: 100,width: 100,fit: BoxFit.fill,),
+                            Text(activity.type.name),
+                          ],
+                        ),
                       )
                   )
 
@@ -138,15 +134,21 @@ class ActivityItem extends StatelessWidget {
           ],
         ),
       ),
-      onTap: (){},
+      onTap: (){
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ActivityDetails(activity),
+          ),
+        );
+      },
     );
   }
 }
 
 class ActivityInfoElement extends StatelessWidget {
-  IconData _iconData;
-  String _title;
-  ActivityInfoElement(this._iconData,this._title);
+  final IconData _iconData;
+  final String _title;
+  const ActivityInfoElement(this._iconData,this._title);
 
   @override
   Widget build(BuildContext context) {
