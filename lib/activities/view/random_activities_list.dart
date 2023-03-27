@@ -13,22 +13,27 @@ class RandomActivitiesList extends StatelessWidget {
     return Scaffold(
     appBar:  AppBar(title: const Text("Random activities"),),
 
-      body: Column(
-        children: [
-          BlocBuilder<ActivityBloc, ActivityState>(
-            builder: (context, state) {
-              if (state is ActivityLoading) {
-                return const Expanded(child: Center(child: CircularProgressIndicator()));
-              }
-              if (state is ActivityLoaded) {
-                return Expanded(child: ListView.builder(itemBuilder: (BuildContext context,int index) => ActivityItem(state.activityList[index]),itemCount: state.activityList.length,));
-              }
-              return const Center(
-                child: Expanded(child: Text('Something went wrong!')),
-              );
-            },
-          ),
-        ],
+      body: RefreshIndicator(
+        onRefresh: () async{
+          context.read<ActivityBloc>().add(ActivityStarted());
+        },
+        child: Column(
+          children: [
+            BlocBuilder<ActivityBloc, ActivityState>(
+              builder: (context, state) {
+                if (state is ActivityLoading) {
+                  return const Expanded(child: Center(child: CircularProgressIndicator()));
+                }
+                if (state is ActivityLoaded) {
+                  return Expanded(child: ListView.builder(itemBuilder: (BuildContext context,int index) => ActivityItem(state.activityList[index]),itemCount: state.activityList.length,));
+                }
+                return const Center(
+                  child: Expanded(child: Text('Something went wrong!')),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
