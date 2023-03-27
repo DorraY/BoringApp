@@ -1,6 +1,8 @@
+import 'package:boring_app/activities/models/base_model.dart';
+
 import 'activity_type.dart';
 
-class Activity  {
+class Activity  extends BaseModel{
 
   ActivityType type;
   String activityTitle;
@@ -22,6 +24,11 @@ class Activity  {
     json["link"] ?? "",
     json["key"] ?? ""
   );
+
+  @override
+  bool isValid() {
+   return activityTitle.isNotEmpty && link.isNotEmpty && key.isNotEmpty && type.isValid();
+  }
 
 }
 
