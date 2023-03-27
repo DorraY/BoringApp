@@ -1,3 +1,4 @@
+import 'package:boring_app/activities/view/activity_search.dart';
 import 'package:boring_app/activities/view/random_activities_list.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +68,14 @@ class HomePage extends StatelessWidget {
                           children: [
                             Expanded(
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                      const ActivitySearch(),
+                                    ),
+                                  );
+                                },
                                 child: const Text("Find an activity"),
                               ),
                             ),

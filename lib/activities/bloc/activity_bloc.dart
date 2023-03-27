@@ -32,6 +32,7 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState> {
       final List<Activity> activityListWithoutDuplicates = activityList.toSet().toList();
       emit(ActivityLoaded(activityListWithoutDuplicates));
     } catch (_) {
+      debugPrint(_.toString());
       emit(ActivityError());
     }
   }

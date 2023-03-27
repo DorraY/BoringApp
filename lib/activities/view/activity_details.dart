@@ -70,7 +70,7 @@ class PageBody extends StatelessWidget {
             ),
           ],
         ),
-        Text('€${activity.price}',style: const TextStyle(color: Colors.grey,fontSize: 25,fontWeight: FontWeight.bold),),
+        Text('${PriceExtension.values[activity.price]!}',style: const TextStyle(color: Colors.grey,fontSize: 25,fontWeight: FontWeight.bold),),
         SizedBox(height: deviceHeight*0.01,),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -79,7 +79,7 @@ class PageBody extends StatelessWidget {
             Container(decoration: const BoxDecoration(border: Border(
                 left: BorderSide(color: Colors.grey)
             )),child: const Text("",style: TextStyle(fontSize: 16))),
-            Text(" ${activity.accessibility} accessibility rate",style: const TextStyle(fontSize: 16))
+            Text(" ${AccessibilityExtension.values[activity.accessibility]} ",style: const TextStyle(fontSize: 16))
 
 
           ],

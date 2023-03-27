@@ -27,8 +27,10 @@ class RandomActivitiesList extends StatelessWidget {
                 if (state is ActivityLoaded) {
                   return Expanded(child: ListView.builder(itemBuilder: (BuildContext context,int index) => ActivityItem(state.activityList[index]),itemCount: state.activityList.length,));
                 }
-                return const Center(
-                  child: Expanded(child: Text('Something went wrong!')),
+                return Expanded(
+                  child: const Center(
+                    child: Text('Something went wrong!'),
+                  ),
                 );
               },
             ),
@@ -48,7 +50,6 @@ class ActivityItem extends StatelessWidget {
     final deviceHeight = MediaQuery.of(context).size.height;
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceOrientation=MediaQuery.of(context).orientation;
-
     return GestureDetector(
       child: Card(
         shape:
@@ -121,9 +122,9 @@ class ActivityItem extends StatelessWidget {
                   ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  ActivityInfoElement(Icons.accessibility, activity.accessibility.toString()),
+                  ActivityInfoElement(Icons.accessibility,AccessibilityExtension.values[activity.accessibility]!),
                   ActivityInfoElement(Icons.people,  activity.numberOfParticipants.toString()),
-                  ActivityInfoElement(Icons.euro,  activity.price.toString())
+                  ActivityInfoElement(Icons.euro,  PriceExtension.values[activity.price]!)
                 ],
               )
                   : Column(
