@@ -11,7 +11,15 @@ class ActivityDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(activity.activityTitle),
+        title: RichText(text: TextSpan(
+          style: const TextStyle(fontSize: 20),
+          children: <TextSpan>[
+            TextSpan(text: "${activity.type.name } ",style: const TextStyle(fontWeight: FontWeight.bold)),
+            const TextSpan(text: "activity")
+          ]
+        ),
+          
+        ),
       ),
       body: OrientationBuilder(
         builder: (context, orientation)
