@@ -6,9 +6,9 @@ class Activity  extends BaseModel{
 
   ActivityType type;
   String activityTitle;
-  int numberOfParticipants;
-  double accessibility;
-  double price;
+  num numberOfParticipants;
+  num accessibility;
+  num price;
   String link;
   String key;
 
@@ -17,8 +17,8 @@ class Activity  extends BaseModel{
 
   factory Activity.fromJson(Map<String,dynamic> json) => Activity(
     ActivityType(json["activity"] ?? "",json["activity"] ?? ""),
-    json["activity"] ?? 0.0,
-    json["participants"] ?? 0.0,
+    json["activity"] ?? "",
+    json["participants"] ?? 0,
     json["accessibility"] ?? 0.0,
     json["price"] ?? 0.0,
     json["link"] ?? "",
@@ -30,5 +30,7 @@ class Activity  extends BaseModel{
    return activityTitle.isNotEmpty && link.isNotEmpty && key.isNotEmpty && type.isValid();
   }
 
+  @override
+  List<Object?> get props => [key];
 }
 

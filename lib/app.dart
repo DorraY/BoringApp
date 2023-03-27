@@ -1,10 +1,31 @@
+import 'package:boring_app/activities/bloc/activity_bloc.dart';
+import 'package:boring_app/activities/services/activity_service.dart';
+import 'package:boring_app/activities/view/random_activities_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App(this.activityService);
+  final ActivityService activityService;
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => ActivityBloc(
+            activityService: activityService,
+          )..add(ActivityStarted()),
+        ),
+      ],
+      child: MaterialApp(
+          theme: ThemeData(
+            fontFamily: GoogleFonts.roboto().fontFamily,
+            primarySwatch: Colors.blue,
+          ),
+          home: RandomActivitiesList()),
+    );
   }
 }
