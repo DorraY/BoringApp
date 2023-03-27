@@ -11,7 +11,7 @@ class RandomActivitiesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar:  AppBar(title: Text("Random activities"),),
+    appBar:  AppBar(title: const Text("Random activities"),),
 
       body: Column(
         children: [
