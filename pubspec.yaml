@@ -16,6 +16,7 @@ dependencies:
   google_fonts: ^4.0.3
   dio: ^5.1.0
   equatable: ^2.0.5
+  flutter_pagewise: ^2.0.4
 
 dev_dependencies:
   flutter_test:
@@ -27,9 +28,18 @@ flutter:
 
   uses-material-design: true
 
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/busywork.jpg
+    - assets/charity.jpg
+    - assets/cooking.jpg
+    - assets/diy.jpg
+    - assets/education.jpg
+    - assets/label.png
+    - assets/music.jpg
+    - assets/recreational.jpg
+    - assets/relaxation.jpg
+    - assets/social.jpg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

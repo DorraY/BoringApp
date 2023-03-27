@@ -11,7 +11,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -21,11 +20,12 @@ class App extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            fontFamily: GoogleFonts.roboto().fontFamily,
-            primarySwatch: Colors.blue,
+            fontFamily: GoogleFonts.poppins().fontFamily,
+            primarySwatch: Colors.deepOrange,
           ),
-          home: RandomActivitiesList()),
+          home: const RandomActivitiesList()),
     );
   }
 }

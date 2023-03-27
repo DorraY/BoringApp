@@ -1,5 +1,4 @@
 import 'package:boring_app/activities/models/base_model.dart';
-import 'package:flutter/cupertino.dart';
 class ActivityType extends BaseModel{
 
   String image;

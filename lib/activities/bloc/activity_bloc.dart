@@ -22,17 +22,16 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState> {
       ) async {
     emit(ActivityLoading());
     try {
-      final List<Activity> activityList = [];
+      List<Activity> activityList = [];
+      final List<Future<Activity>> activityFuturesList = [];
       for (int i=0;i<50;i++) {
-        Activity newActivity=await activityService.getActivity();
-        while (activityList.contains(newActivity) || newActivity.isValid() || newActivity.type.isValid()) {
-          newActivity=await activityService.getActivity();
-        }
-        activityList.add(newActivity);
+        Future<Activity> newFutureActivity=activityService.getActivity();
+        activityFuturesList.add(newFutureActivity);
       }
-      emit(ActivityLoaded(activityList));
+      activityList = await Future.wait(activityFuturesList);
+      final List<Activity> activityListWithoutDuplicates = activityList.toSet().toList();
+      emit(ActivityLoaded(activityListWithoutDuplicates));
     } catch (_) {
-      debugPrint(_.toString());
       emit(ActivityError());
     }
   }
