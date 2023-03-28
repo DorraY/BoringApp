@@ -129,7 +129,7 @@ class ActivityItem extends StatelessWidget {
                   ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  ActivityInfoElement(Icons.accessibility,AccessibilityExtension.values[activity.accessibility]!),
+                  ActivityInfoElement(Icons.star,AccessibilityExtension.values[activity.accessibility]!),
                   ActivityInfoElement(Icons.people,  activity.numberOfParticipants.toString()),
                   ActivityInfoElement(Icons.euro,  PriceExtension.values[activity.price]!)
                 ],
@@ -137,7 +137,7 @@ class ActivityItem extends StatelessWidget {
                   : Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  ActivityInfoElement(Icons.accessibility, activity.accessibility.toString()),
+                  ActivityInfoElement(Icons.star, activity.accessibility.toString()),
                   ActivityInfoElement(Icons.people,  activity.numberOfParticipants.toString()),
                   ActivityInfoElement(Icons.euro,  activity.price.toString())
                 ],

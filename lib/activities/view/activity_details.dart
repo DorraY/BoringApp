@@ -24,7 +24,7 @@ class ActivityDetails extends StatelessWidget {
       body: OrientationBuilder(
         builder: (context, orientation)
         =>orientation==Orientation.portrait ?  PageBody(activity) :
-        SingleChildScrollView(child: PageBody(activity),)
+        PageBody(activity)
         ,
       ),
     );
@@ -37,58 +37,162 @@ class PageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deviceHeight = MediaQuery.of(context).size.height;
-    final deviceWidth = MediaQuery.of(context).size.width;
-
-    return Column(
-      mainAxisSize:  MainAxisSize.min,
-      children: [
-        SizedBox(
-          width: double.infinity,
-          child: Image.asset(
-            "assets/${activity.type.name}.jpg",
-            fit: BoxFit.contain,
-          ),
-        ),
-        Row(
-          children: <Widget>[
-            Flexible(
-              fit: FlexFit.loose,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    children: [
-                      Text(activity.activityTitle,textAlign: TextAlign.center,softWrap: true,style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 20),),
-                      activity.link!="" ? GestureDetector(
-                          onTap: ()=> launchUrl(Uri.parse(activity.link)),
-                          child: Text(activity.link,textAlign: TextAlign.center,softWrap: true,style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: Colors.blue,decoration: TextDecoration.underline),)) : Container(),
-                    ],
-                  ),
+    return OrientationBuilder(
+      builder: (context,orientation) =>
+        orientation==Orientation.portrait ? Column(
+          mainAxisSize:  MainAxisSize.min,
+          children: [
+            Expanded(
+              flex: 2,
+              child: SizedBox(
+                width: double.infinity,
+                child: Image.asset(
+                  "assets/${activity.type.name}.jpg",
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
+            Expanded(child:
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  children: <Widget>[
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+
+                                children: [
+                                  Flexible(child: Text(activity.activityTitle,textAlign: TextAlign.center,softWrap: true,style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 20),maxLines: 2,overflow: TextOverflow.ellipsis,)),
+                                ],
+                              ),
+                              activity.link!="" ? GestureDetector(
+                                  onTap: ()=> launchUrl(Uri.parse(activity.link)),
+                                  child: Text("${activity.link}",maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,softWrap: true,style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: Colors.blue,decoration: TextDecoration.underline),)) : Container(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Text(PriceExtension.values[activity.price]!,style: TextStyle(color: PriceToColor.values[activity.price],fontSize: 25,fontWeight: FontWeight.bold),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("${activity.numberOfParticipants} participant(s) ",style: const TextStyle(fontSize: 16),),
+                    Container(decoration: const BoxDecoration(border: Border(
+                        left: BorderSide(color: Colors.grey)
+                    )),child: const Text("",style: TextStyle(fontSize: 16))),
+                    Text.rich(TextSpan(
+                        style: const TextStyle(fontSize: 16,color: Colors.black),
+                        children: <TextSpan>[
+                          TextSpan(text: " ${AccessibilityExtension.values[activity.accessibility]} ",style: TextStyle(color: AccessibilityToColor.values[activity.accessibility])),
+                        ]
+                    ),
+
+                    )
+
+
+                  ],
+                ),
+              ],
+            ))
+
           ],
-        ),
-        Text('${PriceExtension.values[activity.price]!}',style: const TextStyle(color: Colors.grey,fontSize: 25,fontWeight: FontWeight.bold),),
-        SizedBox(height: deviceHeight*0.01,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text("${activity.numberOfParticipants} participant(s) ",style: const TextStyle(fontSize: 16),),
-            Container(decoration: const BoxDecoration(border: Border(
-                left: BorderSide(color: Colors.grey)
-            )),child: const Text("",style: TextStyle(fontSize: 16))),
-            Text(" ${AccessibilityExtension.values[activity.accessibility]} ",style: const TextStyle(fontSize: 16))
 
+        ) : Row(
+          mainAxisSize:  MainAxisSize.min,
+          children: [
+            Expanded(
+              child: SizedBox(
+                height: double.infinity,
+                child: Image.asset(
+                  "assets/${activity.type.name}.jpg",
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
+            Expanded(child:
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  children: <Widget>[
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(child: Text(activity.activityTitle,textAlign: TextAlign.center, softWrap: true,style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 20),maxLines: 2,overflow: TextOverflow.ellipsis,)),
+                                ],
+                              ),
+                              activity.link!="" ? GestureDetector(
+                                  onTap: ()=> launchUrl(Uri.parse(activity.link)),
+                                  child: Text("${activity.link}",textAlign: TextAlign.center,softWrap: true,maxLines: 2, style: const TextStyle( fontWeight: FontWeight.w500,fontSize: 20,color: Colors.blue,decoration: TextDecoration.underline),),) : Container(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Text(PriceExtension.values[activity.price]!,style: TextStyle(color: PriceToColor.values[activity.price],fontSize: 25,fontWeight: FontWeight.bold),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("${activity.numberOfParticipants} participant(s) ",style: const TextStyle(fontSize: 16),),
+                    Container(decoration: const BoxDecoration(border: Border(
+                        left: BorderSide(color: Colors.grey)
+                    )),child: const Text("",style: TextStyle(fontSize: 16))),
+                    Text.rich(TextSpan(
+                        style: const TextStyle(fontSize: 16,color: Colors.black),
+                        children: <TextSpan>[
+                          TextSpan(text: " ${AccessibilityExtension.values[activity.accessibility]} ",style: TextStyle(color: AccessibilityToColor.values[activity.accessibility])),
+                        ]
+                    ),
+
+                    )
+
+
+                  ],
+                ),
+              ],
+            ))
 
           ],
-        ),
-        SizedBox(height: deviceHeight*0.01,),
 
-      ],
+        )
 
     );
   }
 }
 
+
+extension PriceToColor on Price {
+  static const values = {
+    Price.free: Colors.pinkAccent,
+    Price.cheap: Colors.green,
+    Price.affordable: Colors.deepOrange,
+    Price.expensive: Colors.red,
+  };}
+
+extension AccessibilityToColor on Accessibility {
+  static const values = {
+    Accessibility.open: Colors.pinkAccent,
+    Accessibility.easy: Colors.green,
+    Accessibility.medium: Colors.deepOrange,
+    Accessibility.hard: Colors.red,
+  };}

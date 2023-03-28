@@ -70,10 +70,10 @@ enum Accessibility {
 
 extension AccessibilityExtension on Accessibility {
   static const values = {
-    Accessibility.open: 'Completely accessible',
-    Accessibility.easy: 'Easily accessible',
-    Accessibility.medium: 'Somewhat accessible',
-    Accessibility.hard: 'Hardly accessible',
+    Accessibility.open: 'Open for everyone',
+    Accessibility.easy: 'Easy to achieve',
+    Accessibility.medium: 'Requires some effort',
+    Accessibility.hard: 'Challenging',
   };}
 
 
