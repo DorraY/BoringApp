@@ -42,3 +42,5 @@ flutter:
     - assets/relaxation.jpg
     - assets/social.jpg
     - assets/background.png
+    - assets/error.png
+    - assets/no-activity-found.png

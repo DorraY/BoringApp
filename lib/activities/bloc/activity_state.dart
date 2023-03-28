@@ -9,8 +9,8 @@ abstract class ActivityState extends Equatable {
 
 class ActivityLoading extends ActivityState {}
 
-class ActivityLoaded extends ActivityState {
-  const ActivityLoaded(this.activityList);
+class ActivityListLoaded extends ActivityState {
+  const ActivityListLoaded(this.activityList);
 
   final List<Activity> activityList;
 
@@ -18,4 +18,17 @@ class ActivityLoaded extends ActivityState {
   List<Object> get props => [activityList];
 }
 
-class ActivityError extends ActivityState {}
+class ActivityListError extends ActivityState {}
+
+class ActivitySearchIdle extends ActivityState {}
+
+class ActivitySearchLoaded extends ActivityState {
+  const ActivitySearchLoaded(this.activity);
+
+  final Activity activity;
+
+  @override
+  List<Object> get props => [activity];
+}
+
+class ActivitySearchError extends ActivityState {}

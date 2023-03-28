@@ -17,7 +17,7 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (_) => ActivityBloc(
             activityService: activityService,
-          )..add(ActivityStarted()),
+          ),
         ),
       ],
       child: MaterialApp(

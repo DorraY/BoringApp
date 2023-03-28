@@ -7,7 +7,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(MediaQuery.of(context).orientation.name);
     return Scaffold(
       body: OrientationBuilder(
         builder: (BuildContext context, Orientation orientation) => Stack(
