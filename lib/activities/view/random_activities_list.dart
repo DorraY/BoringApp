@@ -28,8 +28,15 @@ class RandomActivitiesList extends StatelessWidget {
                   return Expanded(child: ListView.builder(itemBuilder: (BuildContext context,int index) => ActivityItem(state.activityList[index]),itemCount: state.activityList.length,));
                 }
                 return Expanded(
-                  child: const Center(
-                    child: Text('Something went wrong!'),
+                  //this stack and empty list view are a workaround to use refreshIndicator in the error case
+                  //because it only works with list views
+                  child: Stack(
+                    children: [
+                      ListView(),
+                      const Center(
+                        child: Text('Something went wrong!'),
+                      ),
+                    ],
                   ),
                 );
               },
