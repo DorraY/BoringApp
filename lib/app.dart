@@ -1,7 +1,6 @@
 import 'package:boring_app/activities/bloc/activity_bloc.dart';
 import 'package:boring_app/activities/services/activity_service.dart';
 import 'package:boring_app/activities/view/home.dart';
-import 'package:boring_app/activities/view/random_activities_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';

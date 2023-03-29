@@ -1,4 +1,3 @@
-
 import 'package:boring_app/activities/models/activity.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -69,7 +68,7 @@ class PageBody extends StatelessWidget {
                               ),
                               activity.link!="" ? GestureDetector(
                                   onTap: ()=> launchUrl(Uri.parse(activity.link)),
-                                  child: Text("${activity.link}",maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,softWrap: true,style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: Colors.blue,decoration: TextDecoration.underline),)) : Container(),
+                                  child: Text(activity.link,maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,softWrap: true,style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: Colors.blue,decoration: TextDecoration.underline),)) : Container(),
                             ],
                           ),
                         ),
@@ -136,7 +135,7 @@ class PageBody extends StatelessWidget {
                               ),
                               activity.link!="" ? GestureDetector(
                                   onTap: ()=> launchUrl(Uri.parse(activity.link)),
-                                  child: Text("${activity.link}",textAlign: TextAlign.center,softWrap: true,maxLines: 2, style: const TextStyle( fontWeight: FontWeight.w500,fontSize: 20,color: Colors.blue,decoration: TextDecoration.underline),),) : Container(),
+                                  child: Text(activity.link,textAlign: TextAlign.center,softWrap: true,maxLines: 2, style: const TextStyle( fontWeight: FontWeight.w500,fontSize: 20,color: Colors.blue,decoration: TextDecoration.underline),),) : Container(),
                             ],
                           ),
                         ),

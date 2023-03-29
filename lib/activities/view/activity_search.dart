@@ -6,14 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'activity_filters.dart';
 import 'activity_item.dart';
 
-class ActivitySearch extends StatefulWidget {
+class ActivitySearch extends StatelessWidget {
   const ActivitySearch({Key? key}) : super(key: key);
 
-  @override
-  _ActivitySearchState createState() => _ActivitySearchState();
-}
-
-class _ActivitySearchState extends State<ActivitySearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,9 +22,7 @@ class _ActivitySearchState extends State<ActivitySearch> {
             (state is ActivitySearchLoaded)
                 ? SearchResultWidget(state, state.activity)
                 : Container(),
-            (state is ActivitySearchError)
-                ? ErrorView()
-                : Container(),
+            (state is ActivitySearchError) ? const ErrorView() : Container(),
           ],
         );
       }),
@@ -51,10 +44,16 @@ class SearchResultWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Center(child: Text('No activity found with the given criteria',textAlign: TextAlign.center, style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold))),
-
-        Center(child: Image.asset("assets/no-activity-found.png",height: 200,width: 200,)),
-
+        const Center(
+            child: Text('No activity found with the given criteria',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+        Center(
+            child: Image.asset(
+          "assets/no-activity-found.png",
+          height: 200,
+          width: 200,
+        )),
       ],
     );
   }
