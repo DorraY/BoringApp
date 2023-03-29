@@ -11,7 +11,7 @@ part 'activity_event.dart';
 part 'activity_state.dart';
 
 class ActivityBloc extends Bloc<ActivityEvent, ActivityState> {
-  ActivityBloc({required this.activityService}) : super(ActivityLoading()) {
+  ActivityBloc({required this.activityService}) : super(ActivitySearchIdle()) {
     on<ActivityListStarted>(_onStarted);
     on<ActivitySearchStarted>(_onActivitySearch);
     

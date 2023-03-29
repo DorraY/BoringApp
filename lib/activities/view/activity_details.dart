@@ -21,12 +21,7 @@ class ActivityDetails extends StatelessWidget {
           
         ),
       ),
-      body: OrientationBuilder(
-        builder: (context, orientation)
-        =>orientation==Orientation.portrait ?  PageBody(activity) :
-        PageBody(activity)
-        ,
-      ),
+      body: PageBody(activity),
     );
   }
 }

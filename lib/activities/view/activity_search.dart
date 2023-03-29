@@ -1,14 +1,10 @@
 import 'package:boring_app/activities/bloc/activity_bloc.dart';
 import 'package:boring_app/activities/models/activity.dart';
-import 'package:boring_app/activities/models/activity_search_criteria.dart';
 import 'package:boring_app/activities/view/error_view.dart';
-import 'package:boring_app/activities/view/random_activities_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:getwidget/components/accordion/gf_accordion.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'activity_filters.dart';
+import 'activity_item.dart';
 
 class ActivitySearch extends StatefulWidget {
   const ActivitySearch({Key? key}) : super(key: key);

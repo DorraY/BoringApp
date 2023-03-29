@@ -1,5 +1,4 @@
 import 'package:boring_app/activities/bloc/activity_bloc.dart';
-import 'package:boring_app/activities/models/activity.dart';
 import 'package:boring_app/activities/models/activity_search_criteria.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +44,6 @@ class _ActivityFiltersState extends State<ActivityFilters> {
   void initState() {
     super.initState();
     _activityBloc = BlocProvider.of<ActivityBloc>(context);
-    _activityBloc.emit(ActivitySearchIdle());
   }
 
   void _onDataReceived(String data) {
@@ -187,42 +185,45 @@ class _ActivityFiltersState extends State<ActivityFilters> {
           activityTypeFilter
               ? ActivityTypeDropDown(_onDataReceived)
               : Container(),
-          (widget.state is ActivitySearchLoaded || widget.state is ActivitySearchError ||widget.state is ActivitySearchIdle) ? Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                    onPressed: () {
-                      _activityBloc.add(ActivitySearchStarted(
-                          ActivitySearchCriteria(
-                              type: activityTypeFilter
-                                  ? selectedActivityType
-                                  : null,
-                              accessibilityMax: accessibilityFilter
-                                  ? _currentAccessibilitySliderValue.end
-                                  .toStringAsFixed(2)
-                                  : null,
-                              accessibilityMin:
-                              accessibilityFilter
-                                  ? _currentAccessibilitySliderValue
-                                  .start
-                                  .toStringAsFixed(2)
-                                  : null,
-                              numberOfParticipants:
-                              numberOfParticipantsFilter
-                                  ? _participantsSliderValue.round()
-                                  : null,
-                              priceMax: priceFilter
-                                  ? _currentPriceSliderValue.end.toStringAsFixed(2)
-                                  : null,
-                              priceMin: priceFilter
-                                  ? _currentPriceSliderValue.start
-                                  .toStringAsFixed(2)
-                                  : null)));
-                    },
-                    child: const Text('Search')),
-              ),
-            ],
-          ) : const Center(child: CircularProgressIndicator())
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: (widget.state is ActivityLoading) ?  const Center(child: CircularProgressIndicator()) : ElevatedButton(
+                      onPressed: () {
+                        _activityBloc.add(ActivitySearchStarted(
+                            ActivitySearchCriteria(
+                                type: activityTypeFilter
+                                    ? selectedActivityType
+                                    : null,
+                                accessibilityMax: accessibilityFilter
+                                    ? _currentAccessibilitySliderValue.end
+                                    .toStringAsFixed(2)
+                                    : null,
+                                accessibilityMin:
+                                accessibilityFilter
+                                    ? _currentAccessibilitySliderValue
+                                    .start
+                                    .toStringAsFixed(2)
+                                    : null,
+                                numberOfParticipants:
+                                numberOfParticipantsFilter
+                                    ? _participantsSliderValue.round()
+                                    : null,
+                                priceMax: priceFilter
+                                    ? _currentPriceSliderValue.end.toStringAsFixed(2)
+                                    : null,
+                                priceMin: priceFilter
+                                    ? _currentPriceSliderValue.start
+                                    .toStringAsFixed(2)
+                                    : null)));
+                      },
+                      child: const Text('Search')) ,
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
