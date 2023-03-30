@@ -1,5 +1,6 @@
 import 'package:boring_app/activities/bloc/activity_bloc.dart';
 import 'package:boring_app/activities/models/activity_search_criteria.dart';
+import 'package:boring_app/activities/models/activity_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -261,17 +262,7 @@ class ActivityTypeDropDown extends StatefulWidget {
 }
 
 class _ActivityTypeDropDownState extends State<ActivityTypeDropDown> {
-  List<String> activityType = [
-    "education",
-    "recreational",
-    "social",
-    "diy",
-    "charity",
-    "cooking",
-    "relaxation",
-    "music",
-    "busywork"
-  ];
+  List<String> activityType = ActivityType.activityType;
   String selectedDropdownValue = "education";
 
   List<DropdownMenuItem<String>> get dropdownItems {

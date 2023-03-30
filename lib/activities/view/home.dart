@@ -1,8 +1,9 @@
 import 'package:boring_app/activities/view/activity_search.dart';
 import 'package:boring_app/activities/view/random_activities_list.dart';
+import 'package:boring_app/utils/media_query_util.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatelessWidget with MediaQueryUtil{
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
             Image.asset(
               "assets/background.png",
               fit: BoxFit.cover,
-              width: MediaQuery.of(context).size.width,
+              width: screenSize(context).width,
               height: double.infinity,
             ),
             Padding(

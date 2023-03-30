@@ -24,7 +24,7 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState> {
     try {
       List<Activity> activityList = [];
       final List<Future<Activity>> activityFuturesList = [];
-      for (int i=0;i<50;i++) {
+      for (int i=0;i<5;i++) {
         Future<Activity> newFutureActivity=activityService.getActivity();
         activityFuturesList.add(newFutureActivity);
       }

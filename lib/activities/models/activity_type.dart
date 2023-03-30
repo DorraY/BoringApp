@@ -1,15 +1,26 @@
 import 'package:boring_app/activities/models/base_model.dart';
 class ActivityType extends BaseModel{
 
-  String image;
   String name;
 
-  ActivityType(this.image, this.name);
+  ActivityType(this.name);
 
   @override
   bool isValid() {
-    return name.isNotEmpty && image.isNotEmpty;
+    return name.isNotEmpty && activityType.contains(name);
   }
+
+  static final List<String> activityType = [
+    "education",
+    "recreational",
+    "social",
+    "diy",
+    "charity",
+    "cooking",
+    "relaxation",
+    "music",
+    "busywork"
+  ];
 
   @override
   List<Object?> get props => [];

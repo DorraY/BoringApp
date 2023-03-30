@@ -21,15 +21,14 @@ class BaseService {
             case DioErrorType.connectionTimeout:
             case DioErrorType.sendTimeout:
             case DioErrorType.receiveTimeout:
-              throw DioErrorWithMessage(error.requestOptions, "Connection timeout. Try again!");
-            case DioErrorType.badResponse:
-            case DioErrorType.cancel:
-              break;
-            case DioErrorType.unknown:
-              throw DioErrorWithMessage(error.requestOptions, "Check your connection then try again!");
+              throw DioErrorWithMessage(error.requestOptions, "Connection timeout. Try again!",);
             case DioErrorType.connectionError:
             case DioErrorType.badCertificate:
-              throw DioErrorWithMessage(error.requestOptions, "Problem connecting. Try again!");
+            case DioErrorType.badResponse:
+            case DioErrorType.cancel:
+              throw DioErrorWithMessage(error.requestOptions, "Problem connecting. Try again!",);
+            case DioErrorType.unknown:
+              throw DioErrorWithMessage(error.requestOptions, "Something went wrong. Try again!");
           }
 
         }
@@ -41,7 +40,7 @@ class BaseService {
 
 class DioErrorWithMessage extends DioError {
   String errorMessage = "An error occurred. try again!";
-  DioErrorWithMessage(RequestOptions r, this.errorMessage) : super(requestOptions: r);
+  DioErrorWithMessage(RequestOptions r, this.errorMessage ) : super(requestOptions: r);
   @override
   String toString() => errorMessage;
 }

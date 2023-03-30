@@ -15,10 +15,10 @@ class Activity  extends BaseModel{
   Activity(this.type,this.activityTitle, this.numberOfParticipants, this.accessibility, this.price,
       this.link, this.key);
 
-  factory Activity.empty() => Activity(ActivityType("",""), "", 2, Accessibility.easy, Price.expensive, "", "");
+  factory Activity.empty() => Activity(ActivityType(""), "", 2, Accessibility.easy, Price.expensive, "", "");
 
   factory Activity.fromJson(Map<String,dynamic> json) => Activity(
-    ActivityType(json["type"] ?? "",json["type"] ?? ""),
+    ActivityType(json["type"] ?? ""),
     json["activity"] ?? "",
     json["participants"] ?? 0,
     mapAccessibility(json["accessibility"] ?? 0.0),

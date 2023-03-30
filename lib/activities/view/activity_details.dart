@@ -1,4 +1,5 @@
 import 'package:boring_app/activities/models/activity.dart';
+import 'package:boring_app/utils/media_query_util.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,15 +26,13 @@ class ActivityDetails extends StatelessWidget {
   }
 }
 
-class PageBody extends StatelessWidget {
+class PageBody extends StatelessWidget with MediaQueryUtil {
   final Activity activity;
   const PageBody(this.activity) ;
 
   @override
   Widget build(BuildContext context) {
-    return OrientationBuilder(
-      builder: (context,orientation) =>
-        orientation==Orientation.portrait ? Column(
+    return screenOrientation(context)==Orientation.portrait ? Column(
           mainAxisSize:  MainAxisSize.min,
           children: [
             Expanded(
@@ -170,7 +169,7 @@ class PageBody extends StatelessWidget {
 
         )
 
-    );
+   ;
   }
 }
 
