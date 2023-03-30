@@ -46,8 +46,28 @@ class _ActivityFiltersState extends State<ActivityFilters> {
     _activityBloc = BlocProvider.of<ActivityBloc>(context);
   }
 
-  void _onDataReceived(String data) {
+  void _onDropdownDataReceived(String data) {
     selectedActivityType = data;
+  }
+
+  void updateFilterRangeValues(String filterTitle,RangeValues sliderNewValues) {
+    {
+      if (filterTitle.contains("Price")) {
+        _currentPriceSliderValue = sliderNewValues;
+        debugPrint(_currentPriceSliderValue.start.toString());
+        debugPrint(_currentPriceSliderValue.end.toString());
+      } else {
+        _currentAccessibilitySliderValue=sliderNewValues;
+      }
+    }
+  }
+
+  void toggleFilterUsage(String filterTitle,bool newValue) {
+    if (filterTitle.contains("Price")) {
+      priceFilter=newValue;
+    } else {
+      accessibilityFilter=newValue;
+    }
   }
 
   @override
@@ -56,92 +76,10 @@ class _ActivityFiltersState extends State<ActivityFilters> {
       padding: const EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              const Expanded(child: Text('Price range filter')),
-              Switch.adaptive(
-                  value: priceFilter,
-                  onChanged: (value) {
-                    setState(() {
-                      priceFilter = value;
-                    });
-                  }),
-            ],
+          FilterWidgetWithRange(toggleFilterUsage: toggleFilterUsage,filterTitle: 'Price range filter', updateFilterRangeValues: updateFilterRangeValues, labels: priceLabels,
           ),
-          priceFilter
-              ? RangeSlider(
-            values: _currentPriceSliderValue,
-            min: 0.0,
-            max: 1.0,
-            divisions: 100,
-            labels: RangeLabels(priceLabels[startIntervalPrice],
-                priceLabels[endIntervalPrice]),
-            onChanged: (RangeValues values) {
-              setState(() {
-                _currentPriceSliderValue = values;
-                startIntervalPrice = values.start == threshold1
-                    ? 0
-                    : values.start < threshold2
-                    ? 1
-                    : values.start < threshold3
-                    ? 2
-                    : 3;
-                endIntervalPrice = values.end < threshold1
-                    ? 0
-                    : values.end < threshold2
-                    ? 1
-                    : values.end < threshold3
-                    ? 2
-                    : 3;
-              });
-            },
-          )
-              : Container(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const Expanded(child: Text('Accessibility range filter')),
-              Switch.adaptive(
-                  value: accessibilityFilter,
-                  onChanged: (value) {
-                    setState(() {
-                      accessibilityFilter = value;
-                    });
-                  }),
-            ],
+          FilterWidgetWithRange(toggleFilterUsage: toggleFilterUsage,filterTitle: 'Accessibility range filter', updateFilterRangeValues: updateFilterRangeValues, labels: accessibilityLabels,
           ),
-          accessibilityFilter
-              ? RangeSlider(
-            values: _currentAccessibilitySliderValue,
-            min: 0.0,
-            max: 1.0,
-            divisions: 100,
-            labels: RangeLabels(
-                accessibilityLabels[startIntervalAccessibility],
-                accessibilityLabels[endIntervalAccessibility]),
-            onChanged: (RangeValues values) {
-              setState(() {
-                _currentAccessibilitySliderValue = values;
-
-                startIntervalAccessibility = values.start == threshold1
-                    ? 0
-                    : values.start < threshold2
-                    ? 1
-                    : values.start < threshold3
-                    ? 2
-                    : 3;
-                endIntervalAccessibility = values.end < threshold1
-                    ? 0
-                    : values.end < threshold2
-                    ? 1
-                    : values.end < threshold3
-                    ? 2
-                    : 3;
-              });
-            },
-          )
-              : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -183,7 +121,7 @@ class _ActivityFiltersState extends State<ActivityFilters> {
             ],
           ),
           activityTypeFilter
-              ? ActivityTypeDropDown(_onDataReceived)
+              ? ActivityTypeDropDown(_onDropdownDataReceived)
               : Container(),
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
@@ -192,6 +130,8 @@ class _ActivityFiltersState extends State<ActivityFilters> {
                 Expanded(
                   child: (widget.state is ActivityLoading) ?  const Center(child: CircularProgressIndicator()) : ElevatedButton(
                       onPressed: () {
+                        debugPrint("priceFilter.toString()");
+                        debugPrint(priceFilter.toString());
                         _activityBloc.add(ActivitySearchStarted(
                             ActivitySearchCriteria(
                                 type: activityTypeFilter
@@ -229,6 +169,93 @@ class _ActivityFiltersState extends State<ActivityFilters> {
     );
   }
 }
+
+class FilterWidgetWithRange extends StatefulWidget {
+  final String filterTitle;
+
+  final List<String> labels;
+
+  final Function toggleFilterUsage;
+  final Function updateFilterRangeValues;
+
+  const FilterWidgetWithRange({
+    required this.labels,
+    required this.filterTitle,
+    required this.toggleFilterUsage,
+    required this.updateFilterRangeValues
+
+});
+
+  @override
+  _FilterWidgetWithRangeState createState() => _FilterWidgetWithRangeState();
+}
+
+class _FilterWidgetWithRangeState extends State<FilterWidgetWithRange> {
+
+  final double threshold1 = 0.0;
+  final double threshold2 = 0.4;
+  final double threshold3 = 0.7;
+  int startInterval = 0;
+  int endInterval = 0;
+  bool filterValue = false;
+  RangeValues sliderRangeValues = const RangeValues(0.1, 0.8);
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Expanded(child: Text(widget.filterTitle)),
+            Switch.adaptive(
+                value: filterValue,
+                onChanged: (value) {
+                  setState(() {
+                    filterValue = value;
+                  });
+                  widget.toggleFilterUsage(widget.filterTitle,filterValue);
+
+                }),
+          ],
+        ),
+        filterValue
+            ? RangeSlider(
+          values: sliderRangeValues,
+          min: 0.0,
+          max: 1.0,
+          divisions: 100,
+          labels: RangeLabels(widget.labels[startInterval],
+              widget.labels[endInterval]),
+          onChanged: (RangeValues values) {
+            widget.updateFilterRangeValues(widget.filterTitle,sliderRangeValues);
+            setState(() {
+              sliderRangeValues = values;
+              startInterval = values.start == threshold1
+                  ? 0
+                  : values.start < threshold2
+                  ? 1
+                  : values.start < threshold3
+                  ? 2
+                  : 3;
+              endInterval = values.end < threshold1
+                  ? 0
+                  : values.end < threshold2
+                  ? 1
+                  : values.end < threshold3
+                  ? 2
+                  : 3;
+            });
+          },
+        )
+            : Container(),
+      ],
+    );
+  }
+}
+
 
 class ActivityTypeDropDown extends StatefulWidget {
   final Function onDataReceived;
