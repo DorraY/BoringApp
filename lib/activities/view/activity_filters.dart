@@ -192,9 +192,7 @@ class FilterWidgetWithRange extends StatefulWidget {
 
 class _FilterWidgetWithRangeState extends State<FilterWidgetWithRange> {
 
-  final double threshold1 = 0.0;
-  final double threshold2 = 0.4;
-  final double threshold3 = 0.7;
+  final List<double> threshold= [0.0,0.4,0.7];
   int startInterval = 0;
   int endInterval = 0;
   bool filterValue = false;
@@ -233,18 +231,18 @@ class _FilterWidgetWithRangeState extends State<FilterWidgetWithRange> {
             widget.updateFilterRangeValues(widget.filterTitle,sliderRangeValues);
             setState(() {
               sliderRangeValues = values;
-              startInterval = values.start == threshold1
+              startInterval = values.start == threshold[0]
                   ? 0
-                  : values.start < threshold2
+                  : values.start < threshold[1]
                   ? 1
-                  : values.start < threshold3
+                  : values.start < threshold[2]
                   ? 2
                   : 3;
-              endInterval = values.end < threshold1
+              endInterval = values.end < threshold[0]
                   ? 0
-                  : values.end < threshold2
+                  : values.end < threshold[1]
                   ? 1
-                  : values.end < threshold3
+                  : values.end < threshold[2]
                   ? 2
                   : 3;
             });

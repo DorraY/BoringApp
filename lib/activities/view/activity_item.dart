@@ -1,18 +1,16 @@
 import 'package:boring_app/activities/models/activity.dart';
+import 'package:boring_app/utils/media_query_util.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import 'activity_details.dart';
 
-class ActivityItem extends StatelessWidget {
+class ActivityItem extends StatelessWidget with MediaQueryUtil {
   final Activity activity;
   const ActivityItem(this.activity);
 
   @override
   Widget build(BuildContext context) {
-    final deviceHeight = MediaQuery.of(context).size.height;
-    final deviceWidth = MediaQuery.of(context).size.width;
-    final deviceOrientation=MediaQuery.of(context).orientation;
     return GestureDetector(
       child: Card(
         shape:
@@ -29,7 +27,7 @@ class ActivityItem extends StatelessWidget {
                         topLeft: Radius.circular(15),
                         topRight: Radius.circular(15)),
                     child: SizedBox(
-                      height: deviceOrientation ==Orientation.portrait ? deviceHeight*0.35 : deviceHeight*0.7,
+                      height: screenOrientation(context) ==Orientation.portrait ? screenSize(context).height*0.35 : screenSize(context).height*0.7,
                       width: double.infinity,
                       child: Image.asset("assets/${activity.type.name}.jpg",fit: BoxFit.cover,),),
                   ),
@@ -41,7 +39,7 @@ class ActivityItem extends StatelessWidget {
                         color: Colors.black54,
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: deviceWidth * 0.05),
+                              horizontal: screenSize(context).width * 0.05),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
@@ -80,8 +78,8 @@ class ActivityItem extends StatelessWidget {
                 ]
             ),
             Padding(
-              padding:  EdgeInsets.symmetric(vertical:deviceHeight*0.01),
-              child: deviceWidth > 200
+              padding:  EdgeInsets.symmetric(vertical:screenSize(context).height*0.01),
+              child: screenSize(context).width > 200
                   ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
@@ -114,17 +112,16 @@ class ActivityItem extends StatelessWidget {
   }
 }
 
-class ActivityInfoElement extends StatelessWidget {
+class ActivityInfoElement extends StatelessWidget with MediaQueryUtil {
   final IconData _iconData;
   final String _title;
   const ActivityInfoElement(this._iconData,this._title);
 
   @override
   Widget build(BuildContext context) {
-    final deviceWidth = MediaQuery.of(context).size.width;
     return Row(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: deviceWidth>200 ? MainAxisAlignment.start : MainAxisAlignment.center,
+      mainAxisAlignment: screenSize(context).width  >200 ? MainAxisAlignment.start : MainAxisAlignment.center,
       children:  <Widget>[
         Icon(_iconData),
         const SizedBox(width: 6,),
