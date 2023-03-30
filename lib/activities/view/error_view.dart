@@ -11,7 +11,7 @@ class ErrorView extends StatelessWidget {
       children: [
 
         Center(child: Image.asset("assets/error.png",height: 200,width: 200,)),
-        Center(child: Text('Some error occured!',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold))),
+        const Center(child: Text('Some error occured!',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold))),
 
       ],
     );
