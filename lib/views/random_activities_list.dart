@@ -1,5 +1,5 @@
-import 'package:boring_app/activities/bloc/activity_bloc.dart';
-import 'package:boring_app/activities/view/error_view.dart';
+import 'package:boring_app/bloc/activity_bloc.dart';
+import 'package:boring_app/views/error_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

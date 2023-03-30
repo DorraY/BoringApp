@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:boring_app/activities/models/activity.dart';
-import 'package:boring_app/activities/models/activity_search_criteria.dart';
-import 'package:boring_app/activities/services/base_service.dart';
+import 'package:boring_app/models/activity.dart';
+import 'package:boring_app/models/activity_search_criteria.dart';
+import 'package:boring_app/services/base_service.dart';
 
 
 class ActivityService extends BaseService {

@@ -1,6 +1,6 @@
-import 'package:boring_app/activities/bloc/activity_bloc.dart';
-import 'package:boring_app/activities/models/activity_search_criteria.dart';
-import 'package:boring_app/activities/models/activity_type.dart';
+import 'package:boring_app/bloc/activity_bloc.dart';
+import 'package:boring_app/models/activity_search_criteria.dart';
+import 'package:boring_app/models/activity_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

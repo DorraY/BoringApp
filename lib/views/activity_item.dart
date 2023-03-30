@@ -1,5 +1,5 @@
-import 'package:boring_app/activities/bloc/activity_bloc.dart';
-import 'package:boring_app/activities/models/activity.dart';
+import 'package:boring_app/bloc/activity_bloc.dart';
+import 'package:boring_app/models/activity.dart';
 import 'package:boring_app/utils/media_query_util.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;

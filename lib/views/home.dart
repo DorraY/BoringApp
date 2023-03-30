@@ -1,5 +1,5 @@
-import 'package:boring_app/activities/view/activity_search.dart';
-import 'package:boring_app/activities/view/random_activities_list.dart';
+import 'package:boring_app/views/activity_search.dart';
+import 'package:boring_app/views/random_activities_list.dart';
 import 'package:boring_app/utils/media_query_util.dart';
 import 'package:flutter/material.dart';
 

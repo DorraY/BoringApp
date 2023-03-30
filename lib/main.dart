@@ -3,7 +3,7 @@ import 'package:boring_app/simple_bloc_ovserver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'activities/services/activity_service.dart';
+import 'services/activity_service.dart';
 
 void main() {
   Bloc.observer = const SimpleBlocObserver();

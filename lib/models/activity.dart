@@ -1,4 +1,4 @@
-import 'package:boring_app/activities/models/base_model.dart';
+import 'package:boring_app/models/base_model.dart';
 
 import 'activity_type.dart';
 

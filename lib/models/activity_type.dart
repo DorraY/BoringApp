@@ -1,4 +1,4 @@
-import 'package:boring_app/activities/models/base_model.dart';
+import 'package:boring_app/models/base_model.dart';
 class ActivityType extends BaseModel{
 
   String name;

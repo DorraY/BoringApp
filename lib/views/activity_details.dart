@@ -1,4 +1,4 @@
-import 'package:boring_app/activities/models/activity.dart';
+import 'package:boring_app/models/activity.dart';
 import 'package:boring_app/utils/media_query_util.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';

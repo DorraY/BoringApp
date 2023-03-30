@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:boring_app/activities/models/activity.dart';
-import 'package:boring_app/activities/models/activity_search_criteria.dart';
-import 'package:boring_app/activities/services/activity_service.dart';
+import 'package:boring_app/models/activity.dart';
+import 'package:boring_app/models/activity_search_criteria.dart';
+import 'package:boring_app/services/activity_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 part 'activity_event.dart';
