@@ -105,7 +105,7 @@ class PageBody extends StatelessWidget with MediaQueryUtil {
                   Text(
                     PriceExtension.values[activity.price]!,
                     style: TextStyle(
-                        color: PriceToColor.values[activity.price],
+                        color: EnumIndexToColor.values[activity.price.index],
                         fontSize: 25,
                         fontWeight: FontWeight.bold),
                   ),
@@ -131,8 +131,8 @@ class PageBody extends StatelessWidget with MediaQueryUtil {
                                   text:
                                       " ${AccessibilityExtension.values[activity.accessibility]} ",
                                   style: TextStyle(
-                                      color: AccessibilityToColor
-                                          .values[activity.accessibility])),
+                                      color: EnumIndexToColor
+                                          .values[activity.accessibility.index])),
                             ]),
                       )
                     ],
@@ -212,7 +212,7 @@ class PageBody extends StatelessWidget with MediaQueryUtil {
                   Text(
                     PriceExtension.values[activity.price]!,
                     style: TextStyle(
-                        color: PriceToColor.values[activity.price],
+                        color: EnumIndexToColor.values[activity.price.index],
                         fontSize: 25,
                         fontWeight: FontWeight.bold),
                   ),
@@ -236,10 +236,10 @@ class PageBody extends StatelessWidget with MediaQueryUtil {
                             children: <TextSpan>[
                               TextSpan(
                                   text:
-                                      " ${AccessibilityExtension.values[activity.accessibility]} ",
+                                      " ${AccessibilityExtension.values[activity.accessibility.index]} ",
                                   style: TextStyle(
-                                      color: AccessibilityToColor
-                                          .values[activity.accessibility])),
+                                      color: EnumIndexToColor
+                                          .values[activity.accessibility.index])),
                             ]),
                       )
                     ],
@@ -251,20 +251,11 @@ class PageBody extends StatelessWidget with MediaQueryUtil {
   }
 }
 
-extension PriceToColor on Price {
-  static const values = {
-    Price.free: Colors.pinkAccent,
-    Price.cheap: Colors.green,
-    Price.affordable: Colors.deepOrange,
-    Price.expensive: Colors.red,
-  };
-}
-
-extension AccessibilityToColor on Accessibility {
-  static const values = {
-    Accessibility.open: Colors.pinkAccent,
-    Accessibility.easy: Colors.green,
-    Accessibility.medium: Colors.deepOrange,
-    Accessibility.hard: Colors.red,
+extension EnumIndexToColor on int {
+  static final values = {
+    0: Colors.pinkAccent,
+    1: Colors.green,
+    2: Colors.deepOrange,
+    3: Colors.red,
   };
 }
