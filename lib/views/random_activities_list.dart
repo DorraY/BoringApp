@@ -20,7 +20,9 @@ class _RandomActivitiesListState extends State<RandomActivitiesList> {
   void initState() {
     super.initState();
     _activityBloc = BlocProvider.of<ActivityBloc>(context);
-    _activityBloc.add(ActivityListStarted());
+    if (_activityBloc.state is! ActivityListLoaded) {
+      _activityBloc.add(ActivityListStarted());
+    }
   }
 
   @override
